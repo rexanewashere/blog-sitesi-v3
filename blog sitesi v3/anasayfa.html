@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rexane Portfolio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body>
+
+    <header class="header">
+        <div class="profile-wrapper">
+            <div class="profile-image">
+                <!-- Fotoğraf Uzantısı (src="Fotoğraf Uzantısını Yaz") -->
+                <img src="pp.png" alt="Profile">
+                <!-- Fotoğraf Uzantısı (src="Fotoğraf Uzantısını Yaz") -->
+            </div>
+            <h1 class="profile-title" data-text="CanBye">CanBye</h1>
+            <p class="profile-subtitle">Senior Web Developer & UI Designer</p>
+            <div class="social-links">
+                <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </header>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">Wrx Team</a>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="nav-links">
+                <a href="#about" class="nav-link">Hakkımda</a>
+                <a href="#skills" class="nav-link">Yetenekler</a>
+                <a href="#brands" class="nav-link">Markalar</a>
+                <a href="#contact" class="nav-link">İletişim</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Muzik Oynatıcısı -->
+    <div class="music-player">
+        <div class="music-controls">
+            <button class="music-btn" id="prevBtn">
+                <i class="fas fa-backward"></i>
+            </button>
+            <button class="music-btn" id="playBtn">
+                <i class="fas fa-play"></i>
+            </button>
+            <button class="music-btn" id="nextBtn">
+                <i class="fas fa-forward"></i>
+            </button>
+        </div>
+        <div class="volume-control">
+            <i class="fas fa-volume-up"></i>
+            <input type="range" class="volume-slider" min="0" max="100" value="50">
+        </div>
+    </div>
+    <section class="about">
+        <h2 class="about-title">Hakkımda</h2>
+        <div class="about-content">
+            <p>Merhaba! Ben rexane, 5 yıllık deneyime sahip bir web geliştiricisi ve UI tasarımcısıyım. 
+            Modern web teknolojileri ve kullanıcı deneyimi tasarımı konusunda uzmanım. 
+            Her projede en iyi kullanıcı deneyimini sunmayı hedefliyorum.</p>
+        </div>
+    </section>
+
+    <section class="brands">
+        <h2 class="about-title">Çalıştığım Markalar</h2>
+        <div class="brands-grid">
+            <div class="brand-card">
+                <!-- Fotoğraf Uzantısı (src="Fotoğraf Uzantısını Yaz") -->
+                <img src="pp.png" alt="Brand 1" class="brand-logo">
+                <!-- Fotoğraf Uzantısı (src="Fotoğraf Uzantısını Yaz") -->
+                <h3 class="brand-name">Wrx Team</h3>
+                <p class="brand-duration">2025 - Günümüz</p>
+            </div>
+            <div class="brand-card">
+                <!-- Fotoğraf Uzantısı (src="Fotoğraf Uzantısını Yaz") -->
+                <img src="pp.png" alt="Brand 2" class="brand-logo">
+                <!-- Fotoğraf Uzantısı (src="Fotoğraf Uzantısını Yaz") -->
+                <h3 class="brand-name">Elit Studio</h3>
+                <p class="brand-duration">2025 - Günümüz</p>
+            </div>
+            <div class="brand-card">
+                <!-- Fotoğraf Uzantısı (src="Fotoğraf Uzantısını Yaz") -->
+                <img src="pp.png" alt="Brand 3" class="brand-logo">
+                <!-- Fotoğraf Uzantısı (src="Fotoğraf Uzantısını Yaz") -->
+                <h3 class="brand-name">Nebuloncraft</h3>
+                <p class="brand-duration">2025 - Günümüz</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="credits">
+            <div class="credit-item">
+                <i class="fas fa-code"></i>
+                <span>Geliştirici: rexane</span>
+            </div>
+            <div class="credit-item">
+                <i class="fas fa-paint-brush"></i>
+                <span>Tasarımcı: rexane</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+
+        const observerCallback = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    
+                    if (entry.target.classList.contains('brand-card')) {
+                        const delay = Array.from(entry.target.parentElement.children).indexOf(entry.target) * 0.2;
+                        entry.target.style.transitionDelay = `${delay}s`;
+                    }
+                }
+            });
+        };
+
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+        
+        document.querySelectorAll('.about-content, .brand-card').forEach(el => {
+            observer.observe(el);
+        });
+
+        
+        document.addEventListener('mousemove', (e) => {
+            const header = document.querySelector('.header');
+            const moveX = (e.clientX - window.innerWidth / 2) * 0.01;
+            const moveY = (e.clientY - window.innerHeight / 2) * 0.01;
+            
+            header.style.backgroundPosition = `${moveX}px ${moveY}px`;
+        });
+
+        
+        document.querySelectorAll('.brand-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = (y - centerY) / 20;
+                const rotateY = -(x - centerX) / 20;
+                
+                card.style.transform = `
+                    perspective(1000px)
+                    rotateX(${rotateX}deg)
+                    rotateY(${rotateY}deg)
+                    translateY(-10px)
+                `;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = '';
+            });
+        });
+
+        
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        
+        window.addEventListener('scroll', () => {
+            const profileImage = document.querySelector('.profile-image');
+            const rotation = window.scrollY * 0.2;
+            profileImage.style.transform = `rotate(${rotation}deg)`;
+        });
+
+      
+        const profileTitle = document.querySelector('.profile-title');
+        profileTitle.addEventListener('mouseover', () => {
+            profileTitle.style.animation = 'none';
+            void profileTitle.offsetWidth; // Trigger reflow
+            profileTitle.style.animation = 'glow 3s ease-in-out infinite';
+        });
+        
+        
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+       
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+       
+        const playBtn = document.getElementById('playBtn');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const volumeSlider = document.querySelector('.volume-slider');
+
+       
+        const audio = new Audio();
+        audio.volume = 0.5;
+
+        // Müzik Listesi Müziklerin Uzantısını Gir static/music/music.mp3 Bu Şekilde
+        const playlist = [
+            'music.mp3',
+            '/path/to/song2.mp3',
+            '/path/to/song3.mp3'
+        ];
+
+        let currentTrack = 0;
+        let isPlaying = false;
+
+     
+        playBtn.addEventListener('click', () => {
+            if (isPlaying) {
+                audio.pause();
+                playBtn.innerHTML = '<i class="fas fa-play"></i>';
+            } else {
+                audio.src = playlist[currentTrack];
+                audio.play();
+                playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+            }
+            isPlaying = !isPlaying;
+        });
+
+      
+        volumeSlider.addEventListener('input', (e) => {
+            audio.volume = e.target.value / 100;
+        });
+
+        prevBtn.addEventListener('click', () => {
+            currentTrack = (currentTrack - 1 + playlist.length) % playlist.length;
+            if (isPlaying) {
+                audio.src = playlist[currentTrack];
+                audio.play();
+            }
+        });
+
+       
+        nextBtn.addEventListener('click', () => {
+            currentTrack = (currentTrack + 1) % playlist.length;
+            if (isPlaying) {
+                audio.src = playlist[currentTrack];
+                audio.play();
+            }
+        });
+
+       
+        const headerParticles = document.createElement('div');
+        headerParticles.classList.add('header-particles');
+        document.querySelector('.header').appendChild(headerParticles);
+        console.log("Developed By rexane");
+        console.log("Design By rexane");
+        for (let i = 0; i < 50; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            particle.style.left = Math.random() * 100 + 'vw';
+            particle.style.animationDelay = Math.random() * 10 + 's';
+            headerParticles.appendChild(particle);
+        }
+        
+document.addEventListener('DOMContentLoaded', () => {
+    playBtn.click();
+});
+    </script>
+</body>
+</html>
